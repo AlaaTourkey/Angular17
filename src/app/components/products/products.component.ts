@@ -20,18 +20,18 @@ export class ProductsComponent {
 
   constructor(){
     this.products = [
-      {id:1, name:'dell laptop' , price:50000, quantity:2 , imgUrl:'https://fakeimg.pl/300/' , catId:1 },
-      {id:2, name:'hp laptop' , price:60000, quantity:2 , imgUrl:'https://fakeimg.pl/300/' , catId:1 },
+      {id:1, name:'dell laptop' , price:50000, quantity:1 , imgUrl:'https://fakeimg.pl/300/' , catId:1 },
+      {id:2, name:'hp laptop' , price:60000, quantity:5 , imgUrl:'https://fakeimg.pl/300/' , catId:1 },
       {id:3, name:'iphone mobile' , price:70000, quantity:2 , imgUrl:'https://fakeimg.pl/300/' , catId:2 },
-      {id:4, name:'oppo mobile' , price:80000, quantity:2 , imgUrl:'https://fakeimg.pl/300/' , catId:2 },
-      {id:5, name:'tablet oppo' , price:40000, quantity:2 , imgUrl:'https://fakeimg.pl/300/' , catId:3 },
+      {id:4, name:'oppo mobile' , price:80000, quantity:1 , imgUrl:'https://fakeimg.pl/300/' , catId:2 },
+      {id:5, name:'tablet oppo' , price:40000, quantity:5 , imgUrl:'https://fakeimg.pl/300/' , catId:3 },
       {id:6, name:'tablet iphone' , price:200000, quantity:2 , imgUrl:'https://fakeimg.pl/300/' , catId:3 },
     ]
 
     this.categories = [
       {id:1 , name :'Laptop'},
       {id:2 , name :'Mobile'},
-      {id:3 , name :'Tablit'},
+      {id:3 , name :'Tablet'},
     ]
   }
 
