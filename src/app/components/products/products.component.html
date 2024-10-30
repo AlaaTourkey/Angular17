@@ -9,39 +9,44 @@
   </div>
 
   <div class="row row-cols-1 row-cols-md-4 g-4">
-    <ng-container *ngFor="let product of products">
-      <div class="col" *ngIf="product.quantity != 0">
-        <div class="card h-100">
-          <img [src]="product.imgUrl" class="card-img-top" alt="{{product.name}}">
-          <div class="card-body" [style.background-color]="(product.quantity == 0)? 'yellow' :'white'  ">
-            <h5 class="card-title">{{product.name}}</h5>
-            <p class="card-text">{{product.price}}</p>
-            <p class="card-text">ID: {{product.id}}</p>
-            <p class="card-text">Category ID: {{product.catId}}</p>
+    <!-- <ng-container *ngFor="let product of products"> -->
+      @for (product of products; track product.id ; let i =$index) {
+        <div class="col" *ngIf="product.quantity != 0">
+          <div class="card h-100">
+            <img [src]="product.imgUrl" class="card-img-top" alt="{{product.name}}">
+            <div class="card-body" [style.background-color]="(product.quantity == 0)? 'yellow' :'white'  ">
+              <h5 class="card-title">{{product.name}}</h5>
+              <p class="card-text">{{product.price}}</p>
+              <p class="card-text">ID: {{product.id}}</p>
+              <p class="card-text">Category ID: {{product.catId}}</p>
 
-            <!-- <p class="card-text" *ngIf="product.quantity != 1 ; else lastItem">Quantity: {{product.quantity}}</p>
+              <!-- <p class="card-text" *ngIf="product.quantity != 1 ; else lastItem">Quantity: {{product.quantity}}</p>
 
-            <ng-template  #lastItem><p class="btn btn-danger">last item</p></ng-template> -->
+              <ng-template  #lastItem><p class="btn btn-danger">last item</p></ng-template> -->
 
 
-            <div [ngSwitch]="product.quantity">
-              <p *ngSwitchCase="1">
-                <span class="btn btn-danger">last item</span>
-              </p>
-              <p *ngSwitchCase="2">
-                <span class="btn btn-danger">last Two item</span>
-              </p>
-              <p *ngSwitchDefault>
-                {{product.quantity}}
-              </p>
+              <div [ngSwitch]="product.quantity">
+                <p *ngSwitchCase="1">
+                  <span class="btn btn-danger">last item</span>
+                </p>
+                <p *ngSwitchCase="2">
+                  <span class="btn btn-danger">last Two item</span>
+                </p>
+                <p *ngSwitchDefault>
+                  {{product.quantity}}
+                </p>
+              </div>
+
+              <input type="number" #countInput />
+              <button class="btn btn-info" (click)="buy(countInput.value , product.price)">Add to cart</button>
             </div>
-
-            <input type="number" #countInput />
-            <button class="btn btn-info" (click)="buy(countInput.value , product.price)">Add to cart</button>
           </div>
         </div>
-      </div>
-    </ng-container>
+
+      }@empty {
+        <h1> empty array </h1>
+      }
+    <!-- </ng-container> -->
 
 
   </div>
