@@ -1,20 +1,22 @@
 <div class="container my-5 ">
   <h1>Total Price : {{totalPrice}}</h1>
   <h3> selected CategoryId : {{selectedCategoryId}}</h3>
+  <h4>{{num | square}}</h4>
   <div class="mb-3">
     <label for="" class="form-label fs-2">Categories</label>
-    <select class="form-select form-select-lg" name="" id="" [(ngModel)]="selectedCategoryId">
+    <select class="form-select form-select-lg" name="" id="" (change)="filterProducts()"  [(ngModel)]="selectedCategoryId">
+      <option selected value="0">All</option>
       <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
     </select>
   </div>
 
   <div class="row row-cols-1 row-cols-md-4 g-4">
     <!-- <ng-container *ngFor="let product of products"> -->
-      @for (product of products; track product.id ; let i =$index) {
-        <div class="col" *ngIf="product.quantity != 0">
-          <div class="card h-100">
+      @for (product of filteredProducts; track product.id ; let i =$index) {
+        <div class="col"  *ngIf="product.quantity != 0">
+          <div class="card h-100 " >
             <img [src]="product.imgUrl" class="card-img-top" alt="{{product.name}}">
-            <div class="card-body" [style.background-color]="(product.quantity == 0)? 'yellow' :'white'  ">
+            <div class="card-body " appHighlight externalColor="red"  >
               <h5 class="card-title">{{product.name}}</h5>
               <p class="card-text">{{product.price}}</p>
               <p class="card-text">ID: {{product.id}}</p>
@@ -25,7 +27,7 @@
               <ng-template  #lastItem><p class="btn btn-danger">last item</p></ng-template> -->
 
 
-              <div [ngSwitch]="product.quantity">
+              <!-- <div [ngSwitch]="product.quantity">
                 <p *ngSwitchCase="1">
                   <span class="btn btn-danger">last item</span>
                 </p>
@@ -35,7 +37,19 @@
                 <p *ngSwitchDefault>
                   {{product.quantity}}
                 </p>
-              </div>
+              </div> -->
+
+              @switch (product.quantity) {
+                @case (1) {
+                  <span class="btn btn-danger">last item</span>
+                }
+                @case (2){
+                  <span class="btn btn-danger">last Two item</span>
+                }
+                @default {
+                  {{product.quantity}}
+                }
+              }
 
               <input type="number" #countInput />
               <button class="btn btn-info" (click)="buy(countInput.value , product.price)">Add to cart</button>

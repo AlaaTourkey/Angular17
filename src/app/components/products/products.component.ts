@@ -3,19 +3,23 @@ import { Iproduct } from '../../models/iproduct';
 import { CommonModule } from '@angular/common';
 import { Icategory } from '../../models/icategory';
 import { FormsModule } from '@angular/forms';
+import { HighlightDirective } from '../../directives/highlight.directive';
+import { SquarePipe } from '../../pipes/square.pipe';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule,HighlightDirective ,SquarePipe],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css'
 })
 export class ProductsComponent {
 
   products:Iproduct[];
+  filteredProducts:Iproduct[];
   categories :Icategory[];
   selectedCategoryId:number = 0
+  num:number  =  4
   totalPrice:number = 0;
 
   constructor(){
@@ -33,10 +37,21 @@ export class ProductsComponent {
       {id:2 , name :'Mobile'},
       {id:3 , name :'Tablet'},
     ]
+
+    this.filteredProducts = this.products
+
   }
 
   buy(count:string , price:number){
     this.totalPrice = this.totalPrice + (Number(count) * price);
     console.log(this.totalPrice)
+  }
+
+  filterProducts(){
+    if (this.selectedCategoryId == 0) {
+      this.filteredProducts =this.products
+    }else{
+      this.filteredProducts = this.products.filter( (prd)=>prd.catId == this.selectedCategoryId )
+    }
   }
 }
